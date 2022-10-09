@@ -1,22 +1,21 @@
-import { abis } from "@my-app/contracts"
-
-import { getPairsInfo } from "./getPairsInfo"
+import { abis } from "@my-app/contracts";
+import { getPairsInfo } from "./getPairsInfo";
 
 export const getFactoryInfo = async (factoryAddress, web3) => {
-    const factory = new web3.eth.Contract(abis.factory, factoryAddress);
+  const factory = new web3.eth.Contract(abis.factory, factoryAddress);
 
-    const factoryInfo = {
-        fee: await factory.methods.feeTo().call(),
-        feeToSetter: await factory.methods.feeToSetter().call(),
-        allPairsLength: await factory.methods.allPairsLength().call(),
-        allPairs: []
-    }
+  const factoryInfo = {
+    feeTo: await factory.methods.feeTo().call(),
+    feeToSetter: await factory.methods.feeToSetter().call(),
+    allPairsLength: await factory.methods.allPairsLength().call(),
+    allPairs: [],
+  };
 
-    for (let i = 0; i < factoryInfo.allPairs; i++) {
-        factoryInfo.allPairs[i] = await factory.methods.allPairs(i).call();
-    }
+  for (let i = 0; i < factoryInfo.allPairsLength; i++) {
+    factoryInfo.allPairs[i] = await factory.methods.allPairs(i).call();
+  }
 
-    factoryInfo.pairsInfo = await getPairsInfo(factoryInfo.allPairs, web3)
+  factoryInfo.pairsInfo = await getPairsInfo(factoryInfo.allPairs, web3);
 
-    return factoryInfo;
+  return factoryInfo;
 }
