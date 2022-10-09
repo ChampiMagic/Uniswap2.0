@@ -37,7 +37,7 @@ function AmountOut({ fromToken, toToken, amountIn, pairContract, currencyValue, 
           <img 
             src={chevronDown}
             alt="chevron down"
-            chassName={`w-4 h-4 object-contain ml-2 ${showList ? 'rotate-180' : 'rotate-0'}`}
+            className={`w-4 h-4 object-contain ml-2 ${showList ? 'rotate-180' : 'rotate-0'}`}
           />
         </button>
 

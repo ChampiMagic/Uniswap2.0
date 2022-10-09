@@ -25,6 +25,6 @@ export const usePools = () => {
           setLoading(false);
         });
   }, [readOnlyUrls, readOnlyChainId]);
-  console.log({pools})
+ 
   return [loading, pools];
 }
